@@ -9,6 +9,7 @@ import {
 import { router } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import Button from "@/components/button/Button";
+import LogoText from "@/components/logoText/LogoText";
 
 export default function WelcomeScreen() {
   return (
@@ -16,10 +17,7 @@ export default function WelcomeScreen() {
       {/* Ist item */}
       <View>
         <Text style={styles.welcomeText}>
-          Welcome to{" "}
-          <Text>
-            Kick<Text style={styles.coloredText}>Hub!</Text>
-          </Text>
+          Welcome to <LogoText>!</LogoText>
         </Text>
       </View>
       {/* second item */}
@@ -28,9 +26,9 @@ export default function WelcomeScreen() {
       </View>
       {/* third item */}
       <View>
-        <Text>
+        <Text style={styles.introText}>
           Level up your sneaker game! Browse the latest drops, limited editions,
-          and top brands - all in the KickHub app
+          and top brands all in the KickHub app
         </Text>
       </View>
       <View style={styles.buttonsWrapper}>
@@ -65,7 +63,15 @@ const styles = StyleSheet.create({
   coloredText: {
     color: Colors.primary,
   },
+
+  introText: {
+    fontSize: 18,
+    color: "#202020",
+    textAlign: "center",
+    padding: 20,
+  },
   buttonsWrapper: {
     width: "90%",
+    marginBottom: 30,
   },
 });

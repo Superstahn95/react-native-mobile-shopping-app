@@ -1,14 +1,10 @@
 import { StyleSheet, Text, View, Alert } from "react-native";
-import { useEffect } from "react";
-import { router } from "expo-router";
-import { Colors } from "@/constants/Colors";
+import LogoText from "@/components/logoText/LogoText";
 
 export default function OnboardingScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Kick<Text style={styles.coloredText}>Hub</Text>
-      </Text>
+      <LogoText fontSize={48} />
     </View>
   );
 }
@@ -18,13 +14,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  text: {
-    fontSize: 48,
-    fontWeight: "bold",
-    color: Colors.secondary,
-  },
-  coloredText: {
-    color: Colors.primary,
   },
 });
