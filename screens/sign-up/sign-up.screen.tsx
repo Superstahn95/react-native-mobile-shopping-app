@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { router } from "expo-router";
 import LogoText from "@/components/logoText/LogoText";
 import CustomInput from "@/components/customInput/CustomInput";
 import Button from "@/components/button/Button";
@@ -23,7 +24,7 @@ export default function SignUpScreen() {
           <View style={{ marginVertical: 72 }}>
             <Button
               title="sign up"
-              onPress={() => console.log("submit")}
+              onPress={() => router.push("/(routes)/verify-email")}
               isFilled
             />
             <Text style={styles.terms}>
