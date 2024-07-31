@@ -35,7 +35,7 @@ export default function WelcomeScreen() {
         <Button
           title={"get started"}
           isFilled={true}
-          onPress={() => console.log("button clicked")}
+          onPress={() => router.push("/(routes)/sign-up")}
         />
         <Button
           title={"sign in"}

@@ -41,6 +41,7 @@ export default function RootLayout() {
       <Stack.Screen name="check" options={{ headerShown: false }} />
       <Stack.Screen name="explore" options={{ headerShown: false }} />
       <Stack.Screen name="(routes)/welcome/index" />
+      <Stack.Screen name="(routes)/sign-up/index" />
       <Stack.Screen name="+not-found" />
     </Stack>
     //  {/* </ThemeProvider> */}
