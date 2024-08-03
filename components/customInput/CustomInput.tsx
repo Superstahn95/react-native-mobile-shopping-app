@@ -14,13 +14,14 @@ export default function CustomInput({
   isRequired,
 }: CustomInputProps) {
   return (
-    <View>
+    <View style={{ marginTop: 16 }}>
       <Text style={styles.label}>
         {label} {isRequired && <Text style={styles.requiredText}>*</Text>}
       </Text>
       <TextInput
         style={styles.textInput}
         placeholder={placeholder ? placeholder : ""}
+        placeholderTextColor="#B3B3B3"
       />
     </View>
   );
@@ -44,5 +45,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 16,
     height: 54,
+    color: "black",
   },
 });

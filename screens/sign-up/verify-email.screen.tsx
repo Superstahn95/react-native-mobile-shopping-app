@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
+import { router } from "expo-router";
 import { SetStateAction, useState } from "react";
 import LogoText from "@/components/logoText/LogoText";
 import Button from "@/components/button/Button";
@@ -19,8 +20,9 @@ export default function VerifyEmailScreen() {
           <View style={{ marginBottom: 30 }}>
             <Text style={styles.verifyBoldText}>Verify your email address</Text>
             <Text style={styles.verificationText}>
-              We have sent a verification code to kel_07@ui.com
+              We have sent a verification code to
             </Text>
+            <Text style={styles.verificationText}>kel_07@ui.com</Text>
           </View>
           <View style={{ width: "90%" }}>
             {/* Otp input should be here */}
@@ -28,7 +30,7 @@ export default function VerifyEmailScreen() {
               <VerificationCodeField />
               <Button
                 title="submit"
-                onPress={() => console.log("submit")}
+                onPress={() => router.push("/(routes)/personal-details")}
                 isFilled
               />
             </ViewWrapper>
@@ -55,10 +57,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 7,
     textAlign: "center",
+    color: "#202020",
   },
   verificationText: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
     color: "#202020",
   },
   requestText: {
