@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
+import { router } from "expo-router";
 import CustomInput from "@/components/customInput/CustomInput";
 import Button from "@/components/button/Button";
 import ColoredText from "@/components/text/ColoredText";
@@ -6,6 +7,10 @@ import ColoredText from "@/components/text/ColoredText";
 const { height } = Dimensions.get("window");
 
 export default function SecondDetailsScreen() {
+  const handleRegistration = () => {
+    console.log("send data to backend");
+    router.push("/(routes)/sign-up/success");
+  };
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flexGrow: 1, width: "100%" }}>
@@ -28,7 +33,7 @@ export default function SecondDetailsScreen() {
               <Button
                 title="Continue"
                 isFilled
-                onPress={() => console.log("data sent to backend")}
+                onPress={() => handleRegistration()}
               />
             </View>
             {/* terms and conditions */}

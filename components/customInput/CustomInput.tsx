@@ -6,12 +6,14 @@ type CustomInputProps = {
   label: string;
   placeholder?: string;
   isRequired: boolean;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export default function CustomInput({
   label,
   placeholder,
   isRequired,
+  setValue,
 }: CustomInputProps) {
   return (
     <View style={{ marginTop: 16 }}>
@@ -22,6 +24,7 @@ export default function CustomInput({
         style={styles.textInput}
         placeholder={placeholder ? placeholder : ""}
         placeholderTextColor="#B3B3B3"
+        onChangeText={(text) => setValue(text)}
       />
     </View>
   );

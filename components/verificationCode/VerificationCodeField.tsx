@@ -1,11 +1,20 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, SetStateAction } from "react";
 import { Colors } from "@/constants/Colors";
 
-export default function VerificationCodeField() {
-  const [code, setCode] = useState<string[]>(["", "", "", ""]);
+interface CodeFieldProps {
+  code: string[];
+  setCode: React.Dispatch<SetStateAction<string[]>>;
+  setIsButtonDisabled: React.Dispatch<SetStateAction<boolean>>;
+}
+export default function VerificationCodeField({
+  code,
+  setIsButtonDisabled,
+  setCode,
+}: CodeFieldProps) {
+  // const [code, setCode] = useState<string[]>(["", "", "", ""]);
   const inputRefs = useRef<TextInput[]>([]);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  // const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
     // Enable the button if the OTP array is filled

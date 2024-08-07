@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { router } from "expo-router";
+import axios from "axios";
+import { router, useLocalSearchParams } from "expo-router";
 import { SetStateAction, useState } from "react";
 import LogoText from "@/components/logoText/LogoText";
 import Button from "@/components/button/Button";
@@ -7,9 +8,45 @@ import ViewWrapper from "@/components/viewWrapper/ViewWrapper";
 import ColoredText from "@/components/text/ColoredText";
 import VerificationCodeField from "@/components/verificationCode/VerificationCodeField";
 
+interface VerifyCodeType {
+  activationCode: string;
+  activationToken: string;
+  email: string;
+}
 const { height } = Dimensions.get("window");
 
 export default function VerifyEmailScreen() {
+  const [code, setCode] = useState<string[]>(["", "", "", ""]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
+  //email from passed params from the previous screen
+  const { email, activationToken } = useLocalSearchParams();
+
+  const verifyCode = async () => {
+    setLoading(true);
+    const activationCode = code.join("");
+    // router.push("/(routes)/personal-details")
+    try {
+      const { data } = await axios.post(
+        "http://172.20.10.5:8080/api/v1/auth/verify-code",
+        { email, activationToken, activationCode }
+      );
+      console.log(data);
+      //if data is gotten, we should be pushed to the screen to enter personal details
+      //throw an email verified succesfully toast
+      router.push({
+        pathname: "/(routes)/personal-details",
+        params: { email, activationCode, activationToken },
+      });
+    } catch (error) {
+      //structure returned error
+      console.log(error);
+      //toast an error when something goes wrong
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flexGrow: 1, width: "100%" }}>
@@ -22,15 +59,20 @@ export default function VerifyEmailScreen() {
             <Text style={styles.verificationText}>
               We have sent a verification code to
             </Text>
-            <Text style={styles.verificationText}>kel_07@ui.com</Text>
+            {/* probably format email to shorten very long mails */}
+            <Text style={styles.verificationText}>{email}</Text>
           </View>
           <View style={{ width: "90%" }}>
             {/* Otp input should be here */}
             <ViewWrapper>
-              <VerificationCodeField />
+              <VerificationCodeField
+                code={code}
+                setCode={setCode}
+                setIsButtonDisabled={setIsButtonDisabled}
+              />
               <Button
-                title="submit"
-                onPress={() => router.push("/(routes)/personal-details")}
+                title={loading ? "processing" : "submit"}
+                onPress={verifyCode}
                 isFilled
               />
             </ViewWrapper>
