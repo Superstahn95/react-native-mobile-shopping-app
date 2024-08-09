@@ -41,8 +41,6 @@ export default function RootLayout() {
       }}
     >
       <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="check" />
-      <Stack.Screen name="explore" />
       <Stack.Screen name="(routes)/welcome/index" />
       <Stack.Screen
         name="(routes)/personal-details/index"

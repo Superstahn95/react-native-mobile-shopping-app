@@ -1,11 +1,17 @@
 import { StyleSheet, Text, View, Dimensions } from "react-native";
+import { router } from "expo-router";
 import LogoText from "@/components/logoText/LogoText";
 import Button from "@/components/button/Button";
 import ColoredText from "@/components/text/ColoredText";
+import { useEffect } from "react";
 
 export default function SignupSuccessScreen() {
   //automatically redirect to home screen
-
+  useEffect(() => {
+    setTimeout(() => {
+      router.push({ pathname: "/(routes)/home" });
+    }, 5000);
+  }, []);
   return (
     <View style={styles.container}>
       <View

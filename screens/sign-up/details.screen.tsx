@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ScrollView, Dimensions } from "react-native";
-import { useState } from "react";
-import { router } from "expo-router";
+import { SetStateAction, useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
 import PhoneInput from "react-native-phone-input";
 import CustomInput from "@/components/customInput/CustomInput";
 import CustomDropDown from "@/components/customDropdown/CustomDropDown";
@@ -10,7 +10,25 @@ const { height } = Dimensions.get("window");
 
 export default function PersonalDetailsScreen() {
   const [detailsScreenNumber, setDetailsScreenNumber] = useState<number>(1);
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [mobileNumber, setMobileNumber] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const { email } = useLocalSearchParams();
+  const goToNextScreen = () => {
+    //figure out a way to send back error message if any of the fields are missing
+    router.push({
+      pathname: "/(routes)/personal-details/second",
+      params: {
+        email,
+        mobileNumber,
+        firstName,
+        lastName,
+        userName,
+      },
+    });
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={{ flexGrow: 1, width: "100%" }}>
@@ -23,17 +41,20 @@ export default function PersonalDetailsScreen() {
               label="First name"
               isRequired={true}
               placeholder="Enter first name"
+              setValue={setFirstName}
             />
             <CustomInput
               label="Last name"
               isRequired={true}
               placeholder="Enter last name"
+              setValue={setLastName}
             />
 
             <CustomInput
               label="Username"
               isRequired={true}
               placeholder="Enter username"
+              setValue={setUserName}
             />
 
             <View style={{ width: "100%", marginTop: 16 }}>
@@ -41,15 +62,11 @@ export default function PersonalDetailsScreen() {
               <PhoneInput
                 style={styles.mobileField}
                 initialCountry="us"
-                onChangePhoneNumber={(value) => setPhoneNumber(value)}
+                onChangePhoneNumber={(value) => setMobileNumber(value)}
               />
             </View>
             <View style={{ marginTop: 48 }}>
-              <Button
-                title="Continue"
-                isFilled
-                onPress={() => router.push("/(routes)/personal-details/second")}
-              />
+              <Button title="Continue" isFilled onPress={goToNextScreen} />
             </View>
             <Text style={{ ...styles.detailsIntro, textAlign: "center" }}>
               For further support, you may visit the Help Center or contact our
